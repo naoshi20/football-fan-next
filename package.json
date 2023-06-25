@@ -7,6 +7,8 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.15",
+    "@supabase/auth-helpers-nextjs": "^0.7.2",
+    "@supabase/supabase-js": "^2.26.0",
     "date-fns": "^2.29.3",
     "gray-matter": "^4.0.3",
     "next": "latest",
