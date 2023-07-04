@@ -18,7 +18,7 @@ export default function MyTabs({ allPlayers }) {
   return (
     <Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
       <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
-        <Tab as="div">
+        <Tab as={Fragment}>
           {({ selected }) => (
             <button
               className={
@@ -31,7 +31,7 @@ export default function MyTabs({ allPlayers }) {
             </button>
           )}
         </Tab>
-        <Tab as="div">
+        <Tab as={Fragment}>
           {({ selected }) => (
             <button
               className={

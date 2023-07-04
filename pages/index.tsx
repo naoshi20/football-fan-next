@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import Base, { siteTitle } from '../components/base'
-import utilStyles from '../styles/utils.module.css'
 import { getPlayers } from '../lib/posts'
 import Link from 'next/link'
 import MyTabs from '../components/mytabs'
