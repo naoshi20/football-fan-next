@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Base, { siteTitle } from '../components/base'
+import Base, { siteTitle } from '../components/base/base'
 import { getPlayers } from '../lib/posts'
 import MyTabs from '../components/mytabs'
 
