@@ -1,10 +1,9 @@
 import { Tab } from '@headlessui/react'
-import Link from 'next/link'
 import { Fragment, useState } from 'react'
 import Image from 'next/image'
 import React from 'react'
 import card from './card.module.scss'
-import StarButton from './star-button'
+import StarButton from './star-button/star-button.component'
 
 const buttonStyle =
   'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black-700 ring-white ring-opacity-60 ring-offset-2 ring-offset-black-400 focus:outline-none focus:ring-2'
