@@ -2,7 +2,7 @@ import { Tab } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 import Image from 'next/image'
 import React from 'react'
-import card from './card.module.scss'
+import card from './card/card.module.scss'
 import StarButton from './star-button/star-button.component'
 
 const buttonStyle =
