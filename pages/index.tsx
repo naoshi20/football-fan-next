@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import Base, { siteTitle } from '../components/base'
 import { getPlayers } from '../lib/posts'
-import Link from 'next/link'
 import MyTabs from '../components/mytabs'
 
 export default function Home({ allPlayers }) {

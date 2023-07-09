@@ -57,12 +57,22 @@ export default function MyTabs({ allPlayers }) {
                     <div className={`card ${card.card}`}>
                       <StarButton></StarButton>
                       <>
-                        {img && (
+                        {img ? (
                           <Image
                             src={img}
                             width={500}
                             height={500}
-                            alt="Picture of the author"
+                            alt="Picture of the player"
+                            quality={100}
+                            priority={false}
+                            className={card.cardImgTop}
+                          />
+                        ) : (
+                          <Image
+                            src="/images/sample-person.jpg"
+                            width={500}
+                            height={500}
+                            alt="Picture of the player"
                             quality={100}
                             priority={false}
                             className={card.cardImgTop}
