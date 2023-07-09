@@ -1,10 +1,10 @@
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 
-export async function getPlayers(from?): Promise<any> {
+export async function getPlayers(): Promise<any> {
   const supabase = createClientComponentClient()
 
   try {
-    let { data, error, status } = await supabase
+    const { data, error, status } = await supabase
       .from('players5')
       .select('*')
       .order('id', { ascending: true })
