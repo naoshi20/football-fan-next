@@ -3,7 +3,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "eslint --ext .ts --ignore-path .gitignore ."
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
