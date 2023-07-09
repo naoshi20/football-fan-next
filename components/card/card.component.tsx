@@ -32,8 +32,8 @@ export default function card({ id, img, japanese_name, belongings }) {
             )}
           </>
           <div className="card-body">
-            <p>{japanese_name}</p>
-            <h5>{belongings}</h5>
+            <p>{belongings}</p>
+            <h5>{japanese_name}</h5>
           </div>
         </div>
       </a>
