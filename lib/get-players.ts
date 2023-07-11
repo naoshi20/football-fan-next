@@ -8,7 +8,6 @@ export async function getPlayers(): Promise<any> {
       .from('players5')
       .select('*')
       .order('id', { ascending: true })
-      .limit(10)
 
     if (error && status !== 406) {
       throw error
