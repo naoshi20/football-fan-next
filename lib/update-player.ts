@@ -1,14 +1,14 @@
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 
-export async function getPlayers(): Promise<any> {
+export default async function updatePlayer(playerId, favorite): Promise<any> {
   const supabase = createClientComponentClient()
 
   try {
     const { data, error, status } = await supabase
       .from('players5')
-      .select('*')
-      .order('id', { ascending: true })
-      .limit(10)
+      .update({ favorite: favorite })
+      .eq('id', playerId)
+      .select()
 
     if (error && status !== 406) {
       throw error

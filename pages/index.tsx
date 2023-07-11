@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Base, { siteTitle } from '../components/base/base'
-import { getPlayers } from '../lib/posts'
+import { getPlayers } from '../lib/get-players'
 import MyTabs from '../components/mytabs/mytabs'
 
 export default function Home({ allPlayers }) {
