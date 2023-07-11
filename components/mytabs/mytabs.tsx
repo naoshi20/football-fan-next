@@ -50,6 +50,7 @@ export default function MyTabs({ allPlayers }) {
             <div className="row">
               {allPlayers.map(({ id, japanese_name, belongings, img }) => (
                 <Card
+                  key={id}
                   id={id}
                   japanese_name={japanese_name}
                   belongings={belongings}
