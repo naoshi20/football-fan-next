@@ -13,7 +13,9 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module'
   },
+  ignorePatterns: ['/*.js'],
   rules: {
-    'no-var-requires': 'off'
+    'no-var-requires': 'off',
+    '@typescript-eslint/no-explicit-any': 'off'
   }
 }
