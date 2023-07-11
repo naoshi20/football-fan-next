@@ -1,25 +1,18 @@
-import { useState } from 'react'
 import card from '../card/card.module.scss'
 import starButton from './star-button.module.scss'
-import updatePlayer from '../../lib/update-player'
 
-export default function StarButton({ playerId }) {
-  const [isFavorite, setIsFavorite] = useState(false)
-
-  async function toggleFavoriteStatus() {
-    setIsFavorite(!isFavorite)
-    await updatePlayer(playerId, !isFavorite)
-  }
-
+export default function StarButton({ playerId, favorite, clickCallBack }) {
   return (
     <div className={card.starButton}>
-      <button onClick={() => toggleFavoriteStatus()}>
+      <button onClick={() => clickCallBack(playerId)}>
         <i
-          className={`fa-star ${
-            isFavorite
+          className={`fa-star
+          ${
+            favorite
               ? `fa-solid ${starButton.orange}`
               : `fa-regular ${starButton.grey}`
-          }`}
+          }
+          `}
         ></i>
       </button>
     </div>

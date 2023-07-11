@@ -2,12 +2,23 @@ import Image from 'next/image'
 import StarButton from '../star-button/star-button.component'
 import scoped from './card.module.scss'
 
-export default function card({ id, img, japanese_name, belongings }) {
+export default function card({
+  id,
+  img,
+  japanese_name,
+  belongings,
+  favorite,
+  clickCallBack
+}) {
   return (
     <div key={id} className="col-md-3 col-sm-4 col-6">
       <a>
         <div className={`card ${scoped.card}`}>
-          <StarButton playerId={id}></StarButton>
+          <StarButton
+            playerId={id}
+            clickCallBack={clickCallBack}
+            favorite={favorite}
+          ></StarButton>
           <>
             {img ? (
               <Image
