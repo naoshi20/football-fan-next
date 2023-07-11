@@ -7,7 +7,7 @@ export default function card({ id, img, japanese_name, belongings }) {
     <div key={id} className="col-md-3 col-sm-4 col-6">
       <a>
         <div className={`card ${scoped.card}`}>
-          <StarButton></StarButton>
+          <StarButton playerId={id}></StarButton>
           <>
             {img ? (
               <Image
