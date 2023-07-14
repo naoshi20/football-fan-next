@@ -1,6 +1,8 @@
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 
-export async function getPlayers(): Promise<any> {
+export async function getAllPlayerIds(): Promise<
+  { [key: string]: { id: any } }[] | null
+> {
   const supabase = createClientComponentClient()
 
   try {
@@ -13,9 +15,20 @@ export async function getPlayers(): Promise<any> {
     if (error && status !== 406) {
       throw error
     }
-
-    return data
+    if (!data) {
+      throw error
+    }
+    return data.map(player => {
+      console.log(player)
+      console.log(player.id.toString())
+      return {
+        params: {
+          id: player.id.toString()
+        }
+      }
+    })
   } catch (error) {
     console.log('Error loading user data!')
   }
+  return null
 }
