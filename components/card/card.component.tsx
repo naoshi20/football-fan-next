@@ -27,7 +27,7 @@ export default function card({
                 width={500}
                 height={500}
                 alt="Picture of the player"
-                quality={100}
+                quality={90}
                 priority={false}
                 className={scoped.cardImgTop}
               />
