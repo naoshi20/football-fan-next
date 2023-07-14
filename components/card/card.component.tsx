@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import StarButton from '../star-button/star-button.component'
 import scoped from './card.module.scss'
+import Link from 'next/link'
 
 export default function card({
   id,
@@ -12,7 +13,7 @@ export default function card({
 }) {
   return (
     <div key={id} className="col-md-3 col-sm-4 col-6">
-      <a>
+      <Link href={`/players/${id}`}>
         <div className={`card ${scoped.card}`}>
           <StarButton
             playerId={id}
@@ -47,7 +48,7 @@ export default function card({
             <h5>{japanese_name}</h5>
           </div>
         </div>
-      </a>
+      </Link>
     </div>
   )
 }
