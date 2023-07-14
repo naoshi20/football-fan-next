@@ -3,8 +3,9 @@ import Script from 'next/script'
 
 import Link from 'next/link'
 import React from 'react'
+import Header from '../header/header.component'
 
-export const siteTitle = 'Next.js Sample Website'
+export const siteTitle = 'Football Fan'
 
 // 全ページ共通のタグを定義
 export default function Base({ children, home }) {
@@ -37,18 +38,20 @@ export default function Base({ children, home }) {
       />
 
       {/* 共通ヘッダー */}
-      <header>{home ? <></> : <></>}</header>
-
-      {/* メインのコンテンツ */}
-      <main>{children}</main>
+      <header>
+        <Header></Header>
+      </header>
 
       {/* ホームではない場合はホームヘ戻るボタンを表示 */}
       {/* TODO|| なぜ&&? */}
       {!home && (
         <div>
-          <Link href="/">← Back to home</Link>
+          <Link href="/">←</Link>
         </div>
       )}
+
+      {/* メインのコンテンツ */}
+      <main>{children}</main>
     </div>
   )
 }
