@@ -8,6 +8,7 @@ import { getFlagData } from '../../lib/flag'
 import { useEffect, useState } from 'react'
 import { getTeamImage } from '../../lib/team'
 import { ABBREVIATED_TEAM_NAME } from '../../model/team.model'
+import PropertyRow from '../../components/property-row/property-row'
 
 export default function Player({ playerData }) {
   const [flagUrl, setFlagUrl] = useState('')
@@ -90,39 +91,44 @@ export default function Player({ playerData }) {
             </div>
             <div className="mt-6">
               <ul>
-                <li
-                  className="w-full flex justify-between py-2"
-                  style={{ textAlign: 'center' }}
-                >
-                  <p className="w-1/2">ポジション</p>
-                  <p className="w-1/2">{playerData.position}</p>
-                </li>
+                <PropertyRow k="所属" v={playerData.belongings}></PropertyRow>
                 <hr
                   style={{
                     color: '#aaaaaa',
                     height: '4px'
                   }}
                 />
-                <li
-                  className="w-full flex justify-between  py-2"
-                  style={{ textAlign: 'center' }}
-                >
-                  <p className="w-1/2">背番号</p>
-                  <p className="w-1/2">{playerData.back_number}</p>
-                </li>
+                <PropertyRow
+                  k="ナショナリティ"
+                  v={playerData.country}
+                ></PropertyRow>
                 <hr
                   style={{
                     color: '#aaaaaa',
                     height: '4px'
                   }}
                 />
-                <li
-                  className="w-full flex justify-between py-2"
-                  style={{ textAlign: 'center' }}
-                >
-                  <p className="w-1/2">誕生日</p>
-                  <p className="w-1/2">{playerData.birthday}</p>
-                </li>
+                <PropertyRow
+                  k="ポジション"
+                  v={playerData.position}
+                ></PropertyRow>
+                <hr
+                  style={{
+                    color: '#aaaaaa',
+                    height: '4px'
+                  }}
+                />
+                <PropertyRow
+                  k="背番号"
+                  v={playerData.back_number}
+                ></PropertyRow>
+                <hr
+                  style={{
+                    color: '#aaaaaa',
+                    height: '4px'
+                  }}
+                />
+                <PropertyRow k="誕生日" v={playerData.birthday}></PropertyRow>
               </ul>
             </div>
           </div>
