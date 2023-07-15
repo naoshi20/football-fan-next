@@ -6,19 +6,33 @@ import Image from 'next/image'
 import { Player } from '../../model/player.model'
 import { getFlagData } from '../../lib/flag'
 import { useEffect, useState } from 'react'
+import { getTeamImage } from '../../lib/team'
+import { ABBREVIATED_TEAM_NAME } from '../../model/team.model'
 
 export default function Player({ playerData }) {
   const [flagUrl, setFlagUrl] = useState('')
+  const [teamImageUrl, setTeamImageUrl] = useState('')
 
-  const useEffectCallback = async () => {
+  const useEffectCallbackForFlag = async () => {
     const flag = await getFlagData(playerData.country_code)
     if (flag) {
       setFlagUrl(flag.url)
     }
   }
+  const useEffectCallbackForTeamImage = async () => {
+    const image = await getTeamImage(
+      ABBREVIATED_TEAM_NAME[playerData.belongings]
+    )
+    console.log('image')
+    console.log(image)
+    if (image) {
+      setTeamImageUrl(image.url)
+    }
+  }
 
   useEffect(() => {
-    useEffectCallback()
+    useEffectCallbackForFlag()
+    useEffectCallbackForTeamImage()
   }, [])
 
   return (
@@ -38,6 +52,18 @@ export default function Player({ playerData }) {
             alt="Avatar"
             className="avatar image"
             style={{ height: 14, width: 22 }}
+          />
+        ) : (
+          <></>
+        )}
+        {teamImageUrl ? (
+          <Image
+            width={22}
+            height={22}
+            src={teamImageUrl}
+            alt="Avatar"
+            className="avatar image"
+            style={{ height: 22, width: 22 }}
           />
         ) : (
           <></>
