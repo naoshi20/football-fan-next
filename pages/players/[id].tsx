@@ -2,9 +2,25 @@ import Head from 'next/head'
 import Base, { siteTitle } from '../../components/base/base'
 import { getAllPlayerIds } from '../../lib/get-all-player-ids'
 import { getPlayerData } from '../../lib/get-player'
+import Image from 'next/image'
+import { Player } from '../../model/player.model'
+import { getFlagData } from '../../lib/get-flag'
+import { useEffect, useState } from 'react'
 
 export default function Player({ playerData }) {
-  console.log(playerData)
+  const [flagUrl, setFlagUrl] = useState('')
+
+  const useEffectCallback = async () => {
+    const flag = await getFlagData(playerData.country_code)
+    if (flag) {
+      setFlagUrl(flag.url)
+    }
+  }
+
+  useEffect(() => {
+    useEffectCallback()
+  }, [])
+
   return (
     <Base home={false}>
       {/* Baseにchildren propsとして渡される */}
@@ -12,12 +28,20 @@ export default function Player({ playerData }) {
         <title>{siteTitle}</title>
       </Head>
       <article>
-        {playerData.map(({ id, japanese_name, team }) => (
-          <>
-            <h1 className="">{japanese_name}</h1>
-            <div className="">{team}</div>
-          </>
-        ))}
+        <h1 className="">{playerData.japanese_name}</h1>
+        <p className="">{playerData.belongings}</p>
+        {flagUrl ? (
+          <Image
+            width={22}
+            height={14}
+            src={flagUrl}
+            alt="Avatar"
+            className="avatar image"
+            style={{ height: 14, width: 22 }}
+          />
+        ) : (
+          <></>
+        )}
       </article>
     </Base>
   )

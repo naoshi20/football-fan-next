@@ -1,4 +1,5 @@
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { DATABASE_TABLE_NAME } from './get-players'
 
 export async function getAllPlayerIds(): Promise<
   { [key: string]: { id: any } }[] | null
@@ -10,7 +11,7 @@ export async function getAllPlayerIds(): Promise<
     let result
     if (env == 'development') {
       result = await supabase
-        .from('players5')
+        .from(DATABASE_TABLE_NAME)
         .select('*')
         .order('id', { ascending: true })
         .limit(10)
@@ -18,7 +19,7 @@ export async function getAllPlayerIds(): Promise<
 
     if (env == 'production') {
       result = await supabase
-        .from('players5')
+        .from(DATABASE_TABLE_NAME)
         .select('*')
         .order('id', { ascending: true })
     }
@@ -27,8 +28,6 @@ export async function getAllPlayerIds(): Promise<
       throw result.error
     }
     return result.data.map(player => {
-      console.log(player)
-      console.log(player.id.toString())
       return {
         params: {
           id: player.id.toString()

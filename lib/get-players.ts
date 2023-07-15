@@ -1,4 +1,5 @@
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+export const DATABASE_TABLE_NAME = 'players'
 
 export async function getPlayers(): Promise<any> {
   const supabase = createClientComponentClient()
@@ -8,7 +9,7 @@ export async function getPlayers(): Promise<any> {
     let result
     if (env == 'development') {
       result = await supabase
-        .from('players5')
+        .from(DATABASE_TABLE_NAME)
         .select('*')
         .order('id', { ascending: true })
         .limit(10)
@@ -16,7 +17,7 @@ export async function getPlayers(): Promise<any> {
 
     if (env == 'production') {
       result = await supabase
-        .from('players5')
+        .from(DATABASE_TABLE_NAME)
         .select('*')
         .order('id', { ascending: true })
     }
