@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Card from '../card/card.component'
-import updatePlayer from '../../lib/update-player'
+import { updatePlayer } from '../../lib/player'
 
 export default function cards({ allPlayers, displayFavorite }) {
   const [currentAllPlayers, setAllPlayersState] = useState(allPlayers)

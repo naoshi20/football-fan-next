@@ -1,10 +1,10 @@
 import Head from 'next/head'
 import Base, { siteTitle } from '../../components/base/base'
-import { getAllPlayerIds } from '../../lib/get-all-player-ids'
-import { getPlayerData } from '../../lib/get-player'
+import { getAllPlayerIds } from '../../lib/player'
+import { getPlayerData } from '../../lib/player'
 import Image from 'next/image'
 import { Player } from '../../model/player.model'
-import { getFlagData } from '../../lib/get-flag'
+import { getFlagData } from '../../lib/flag'
 import { useEffect, useState } from 'react'
 
 export default function Player({ playerData }) {

@@ -5,8 +5,8 @@ export async function getFlagData(country: string) {
   try {
     console.log(country)
     const { data, error } = await supabase.storage
-      .from('flags')
-      .download(`${country}.png`)
+      .from('images')
+      .download(`flags/${country}.png`)
     if (error) {
       throw error
     }
