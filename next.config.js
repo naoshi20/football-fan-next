@@ -11,6 +11,9 @@ module.exports = {
     remotePatterns: [
       {
         hostname: 'resources.premierleague.com'
+      },
+      {
+        hostname: 'lyjuozfbxudipzifhgag.supabase.co'
       }
     ]
   }

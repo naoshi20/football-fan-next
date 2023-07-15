@@ -8,4 +8,5 @@ export interface Player {
   representative_flag: boolean
   birthday: string | null
   img: string | null
+  country_code: string
 }
