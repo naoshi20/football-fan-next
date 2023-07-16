@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import Cards from '../cards/cards.component'
+import Image from 'next/image'
+import { ABBREVIATED_TEAM_NAME } from '../../model/team.model'
 
 const buttonStyle =
   'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-black-700 ring-white ring-opacity-60 ring-offset-2 ring-offset-black-400 focus:outline-none focus:ring-2'
@@ -11,9 +13,20 @@ const tabContentStyle =
 
 export default function MyTabs({ allPlayers }) {
   const [displayFavorite, setDisplayFavorite] = useState(true)
+  const initialValue = convertArrayToObject(
+    Object.values(ABBREVIATED_TEAM_NAME)
+  )
+  console.log(initialValue)
+  const [displayTeamObj, setDisplayTeamObj] = useState(initialValue)
 
   function toggleTab(favorite) {
     setDisplayFavorite(favorite)
+  }
+
+  function toggleDisplayTeamObj(teamName) {
+    const nextDisplayTeamObj = { ...displayTeamObj }
+    nextDisplayTeamObj[teamName] = !displayTeamObj[teamName]
+    setDisplayTeamObj(nextDisplayTeamObj)
   }
 
   return (
@@ -40,6 +53,33 @@ export default function MyTabs({ allPlayers }) {
           全選手
         </button>
       </div>
+      <div className="grid grid-cols-10">
+        {Object.values(ABBREVIATED_TEAM_NAME).map(teamName =>
+          displayTeamObj[teamName] ? (
+            <button onClick={() => toggleDisplayTeamObj(teamName)}>
+              <Image
+                src={`/images/teams/${teamName}.png`}
+                width={48}
+                height={48}
+                alt="Picture of the player"
+                quality={100}
+                priority={false}
+              />
+            </button>
+          ) : (
+            <button onClick={() => toggleDisplayTeamObj(teamName)}>
+              <Image
+                src={`/images/teams/${teamName}_gray_alpha.png`}
+                width={48}
+                height={48}
+                alt="Picture of the player"
+                quality={100}
+                priority={false}
+              />
+            </button>
+          )
+        )}
+      </div>
       <div>
         <div className={tabContentStyle}>
           <div className="wrapper">
@@ -47,6 +87,7 @@ export default function MyTabs({ allPlayers }) {
               <Cards
                 allPlayers={allPlayers}
                 displayFavorite={displayFavorite}
+                displayTeamObj={displayTeamObj}
               ></Cards>
             </div>
           </div>
@@ -54,4 +95,12 @@ export default function MyTabs({ allPlayers }) {
       </div>
     </div>
   )
+}
+
+function convertArrayToObject(array) {
+  const obj = {}
+  array.forEach(v => {
+    obj[v] = true
+  })
+  return obj
 }

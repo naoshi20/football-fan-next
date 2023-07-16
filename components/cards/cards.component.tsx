@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import Card from '../card/card.component'
 import { updatePlayer } from '../../lib/player'
+import { ABBREVIATED_TEAM_NAME } from '../../model/team.model'
 
-export default function cards({ allPlayers, displayFavorite }) {
+export default function cards({ allPlayers, displayFavorite, displayTeamObj }) {
   const [currentAllPlayers, setAllPlayersState] = useState(allPlayers)
 
   function updatePlayersFavoriteStatus(playerId) {
@@ -23,6 +24,9 @@ export default function cards({ allPlayers, displayFavorite }) {
         .filter(player =>
           // favoriteタブならfilterかけるが、そうでなければ全ての行を返す
           displayFavorite ? player.favorite === true : true
+        )
+        .filter(
+          player => displayTeamObj[ABBREVIATED_TEAM_NAME[player.belongings]]
         )
         .map(({ id, japanese_name, belongings, img, favorite }) => (
           <Card
