@@ -16,7 +16,6 @@ export default function MyTabs({ allPlayers }) {
   const initialValue = convertArrayToObject(
     Object.values(ABBREVIATED_TEAM_NAME)
   )
-  console.log(initialValue)
   const [displayTeamObj, setDisplayTeamObj] = useState(initialValue)
 
   function toggleTab(favorite) {
@@ -53,10 +52,13 @@ export default function MyTabs({ allPlayers }) {
           全選手
         </button>
       </div>
-      <div className="grid grid-cols-10">
+      <div className="grid grid-cols-10 mt-4">
         {Object.values(ABBREVIATED_TEAM_NAME).map(teamName =>
           displayTeamObj[teamName] ? (
-            <button onClick={() => toggleDisplayTeamObj(teamName)}>
+            <button
+              onClick={() => toggleDisplayTeamObj(teamName)}
+              className="flex justify-center"
+            >
               <Image
                 src={`/images/teams/${teamName}.png`}
                 width={48}
