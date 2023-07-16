@@ -24,8 +24,7 @@ export default function Player({ playerData }) {
     const image = await downloadTeamImage(
       ABBREVIATED_TEAM_NAME[playerData.belongings]
     )
-    console.log('image')
-    console.log(image)
+
     if (image) {
       setTeamImageUrl(image.url)
     }
