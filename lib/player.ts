@@ -13,7 +13,7 @@ export async function getPlayers(): Promise<any> {
         .from(DATABASE_TABLE_NAME)
         .select('*')
         .order('id', { ascending: true })
-        .limit(10)
+        .limit(40)
     }
 
     if (env == 'production') {

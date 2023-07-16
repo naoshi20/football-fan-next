@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { Player } from '../../model/player.model'
 import { getFlagData } from '../../lib/flag'
 import { useEffect, useState } from 'react'
-import { getTeamImage } from '../../lib/team'
+import { downloadTeamImage } from '../../lib/team'
 import { ABBREVIATED_TEAM_NAME } from '../../model/team.model'
 import PropertyRow from '../../components/property-row/property-row'
 
@@ -21,7 +21,7 @@ export default function Player({ playerData }) {
     }
   }
   const useEffectCallbackForTeamImage = async () => {
-    const image = await getTeamImage(
+    const image = await downloadTeamImage(
       ABBREVIATED_TEAM_NAME[playerData.belongings]
     )
     console.log('image')
