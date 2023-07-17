@@ -9,8 +9,8 @@ export default function StarButton({ playerId, favorite, clickCallBack }) {
     <div className={`${card.starButton} p-2`}>
       <button
         onClick={e => {
-          e.preventDefault() // prevent page transition by link component
           handleClick(playerId)
+          e.preventDefault() // prevent page transition by link component
         }}
       >
         <i
