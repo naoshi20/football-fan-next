@@ -101,7 +101,7 @@ export async function updatePlayer(playerId, favorite): Promise<any> {
 
   try {
     const { data, error, status } = await supabase
-      .from('players5')
+      .from(DATABASE_TABLE_NAME)
       .update({ favorite: favorite })
       .eq('id', playerId)
       .select()
