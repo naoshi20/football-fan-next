@@ -53,34 +53,25 @@ export default function MyTabs({ allPlayers }) {
         </button>
       </div>
       <div className="grid grid-cols-10 mt-4">
-        {Object.values(ABBREVIATED_TEAM_NAME).map(teamName =>
-          displayTeamObj[teamName] ? (
-            <button
-              onClick={() => toggleDisplayTeamObj(teamName)}
-              className="flex justify-center"
-            >
-              <Image
-                src={`/images/teams/${teamName}.png`}
-                width={48}
-                height={48}
-                alt="Picture of the player"
-                quality={100}
-                priority={false}
-              />
-            </button>
-          ) : (
-            <button onClick={() => toggleDisplayTeamObj(teamName)}>
-              <Image
-                src={`/images/teams/${teamName}_gray_alpha.png`}
-                width={48}
-                height={48}
-                alt="Picture of the player"
-                quality={100}
-                priority={false}
-              />
-            </button>
-          )
-        )}
+        {Object.values(ABBREVIATED_TEAM_NAME).map(teamName => (
+          <button
+            onClick={() => toggleDisplayTeamObj(teamName)}
+            className="flex justify-center"
+          >
+            <Image
+              src={
+                displayTeamObj[teamName]
+                  ? `/images/teams/${teamName}.png`
+                  : `/images/teams/${teamName}_gray_alpha.png`
+              }
+              width={48}
+              height={48}
+              alt="Picture of the player"
+              quality={100}
+              priority={false}
+            />
+          </button>
+        ))}
       </div>
       <div>
         <div className={tabContentStyle}>
