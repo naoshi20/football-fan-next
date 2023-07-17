@@ -57,6 +57,7 @@ export default function MyTabs({ allPlayers }) {
           <button
             onClick={() => toggleDisplayTeamObj(teamName)}
             className="flex justify-center"
+            key={teamName}
           >
             <Image
               src={
