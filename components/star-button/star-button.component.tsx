@@ -7,22 +7,20 @@ export default function StarButton({ playerId, favorite, clickCallBack }) {
   }
   return (
     <div className={`${card.starButton} p-2`}>
+      {/* aria-pressed="false"使ってみたい */}
       <button
         onClick={e => {
           handleClick(playerId)
           e.preventDefault() // prevent page transition by link component
         }}
-      >
-        <i
-          className={`fa-star
-          ${
-            favorite
-              ? `fa-solid ${starButton.orange}`
-              : `fa-regular ${starButton.grey}`
-          }
-          `}
-        ></i>
-      </button>
+        className={`fa-star
+      ${
+        favorite
+          ? `fa-solid ${starButton.orange}`
+          : `fa-regular ${starButton.grey}`
+      }
+      `}
+      ></button>
     </div>
   )
 }
