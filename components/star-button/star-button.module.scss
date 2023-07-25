@@ -1,16 +1,22 @@
 // @import 'src/assets/styles/reset.scss';
 
-// button {
-//   background-color: transparent;
-//   border: none;
-// }
-
-.orange {
-  color: orange;
-  cursor: pointer;
+.checkboxContainer {
+  display: inline-block;
+  vertical-align: middle;
 }
 
-.grey {
+.checkboxInput {
+  display: none;
+}
+
+.checkboxIcon {
   color: grey;
-  cursor: pointer;
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  vertical-align: middle;
+}
+
+.checked {
+  color: orange;
 }

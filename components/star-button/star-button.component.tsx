@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStar as faStarSolid } from '@fortawesome/free-solid-svg-icons'
+import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons'
 import card from '../card/card.module.scss'
 import starButton from './star-button.module.scss'
 
@@ -6,21 +9,23 @@ export default function StarButton({ playerId, favorite, clickCallBack }) {
     clickCallBack(playerId)
   }
   return (
-    <div className={`${card.starButton} p-2`}>
-      {/* aria-pressed="false"使ってみたい */}
-      <button
-        onClick={e => {
-          handleClick(playerId)
-          e.preventDefault() // prevent page transition by link component
-        }}
-        className={`fa-star
-      ${
-        favorite
-          ? `fa-solid ${starButton.orange}`
-          : `fa-regular ${starButton.grey}`
-      }
-      `}
-      ></button>
+    <div className={`${starButton.checkboxContainer} ${card.starButton} p-2`}>
+      <label>
+        <input
+          type="checkbox"
+          className={`${starButton.checkboxInput}`}
+          checked={favorite}
+          onChange={() => handleClick(playerId)}
+        />
+        <div>
+          <FontAwesomeIcon
+            icon={favorite ? faStarSolid : faStarRegular}
+            className={`${starButton.checkboxIcon} ${
+              favorite ? `${starButton.checked}` : ''
+            }`}
+          />
+        </div>
+      </label>
     </div>
   )
 }

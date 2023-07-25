@@ -12,41 +12,43 @@ export default function Card({
   clickCallBack
 }) {
   return (
-    <Link href={`/players/${id}`} key={id} className="col-md-3 col-sm-4 col-6">
-      <div className={`card ${scoped.card}`}>
-        <StarButton
-          playerId={id}
-          clickCallBack={clickCallBack}
-          favorite={favorite}
-        ></StarButton>
-        <>
-          {img ? (
-            <Image
-              src={img}
-              width={500}
-              height={500}
-              alt="Picture of the player"
-              quality={90}
-              priority={false}
-              className={scoped.cardImgTop}
-            />
-          ) : (
-            <Image
-              src="/images/sample-person.jpg"
-              width={500}
-              height={500}
-              alt="Picture of the player"
-              quality={100}
-              priority={false}
-              className={scoped.cardImgTop}
-            />
-          )}
-        </>
-        <div className="card-body">
-          <p>{belongings}</p>
-          <h5>{japanese_name}</h5>
+    <div className={`col-md-3 col-sm-4 col-6 ${scoped.imgWrapper}`}>
+      <StarButton
+        playerId={id}
+        clickCallBack={clickCallBack}
+        favorite={favorite}
+      ></StarButton>
+      <Link href={`/players/${id}`} key={id}>
+        <div className={`card ${scoped.card}`}>
+          <>
+            {img ? (
+              <Image
+                src={img}
+                width={500}
+                height={500}
+                alt="Picture of the player"
+                quality={90}
+                priority={false}
+                className={scoped.cardImgTop}
+              />
+            ) : (
+              <Image
+                src="/images/sample-person.jpg"
+                width={500}
+                height={500}
+                alt="Picture of the player"
+                quality={100}
+                priority={false}
+                className={scoped.cardImgTop}
+              />
+            )}
+          </>
+          <div className="card-body">
+            <p>{belongings}</p>
+            <h5>{japanese_name}</h5>
+          </div>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   )
 }
