@@ -8,19 +8,20 @@ jest.mock('../star-button/star-button.component', () => {
   }
 })
 
-describe('Card Componentをレンダリングした時、', () => {
+describe('When the Card Component is rendered,', () => {
   let getByRole, getByTestId, clickCallBack, aTag, starButton, img, imgSrc
 
   beforeEach(() => {
     clickCallBack = jest.fn()
   })
-  describe('選手データが存在する場合、', () => {
+
+  describe('When the player data is provided,', () => {
     beforeEach(() => {
       imgSrc = 'https://example.com/player.jpg'
       const props = {
         id: '1',
-        japanese_name: 'テスト',
-        belongings: 'テスト',
+        japanese_name: 'Test',
+        belongings: 'Test',
         favorite: false,
         img: imgSrc,
         clickCallBack: clickCallBack
@@ -35,15 +36,15 @@ describe('Card Componentをレンダリングした時、', () => {
       starButton = getByTestId('star-button')
     })
 
-    test('リンクの遷移先が正しい遷移先になっていること', async () => {
+    it('Should have the correct link destination', async () => {
       expect(aTag).toHaveAttribute('href', `/players/1`)
     })
 
-    test('スターボタンがレンダリングされていること', async () => {
+    it('Should render the StarButton', async () => {
       expect(starButton).toBeInTheDocument()
     })
 
-    test('imgが存在する場合には、該当の画像が表示されること', async () => {
+    it('Should display the correct image when an image url is provided', async () => {
       expect(img).toBeInTheDocument()
       expect(img).toHaveAttribute(
         'src',
@@ -52,15 +53,15 @@ describe('Card Componentをレンダリングした時、', () => {
     })
   })
 
-  describe('選手データが存在する場合、', () => {
+  describe('When the player data does not include an image url,', () => {
     let defaultImgSrc
 
     beforeEach(() => {
       defaultImgSrc = '/images/sample-person.jpg'
       const props = {
         id: '123',
-        japanese_name: 'テスト',
-        belongings: 'テスト',
+        japanese_name: 'Test',
+        belongings: 'Test',
         favorite: false,
         img: '',
         clickCallBack: clickCallBack
@@ -71,7 +72,7 @@ describe('Card Componentをレンダリングした時、', () => {
       img = getByRole('img')
     })
 
-    test('サンプル画像が表示されること', async () => {
+    it('Should display the default sample image', async () => {
       expect(img).toBeInTheDocument()
       expect(img).toHaveAttribute(
         'src',

@@ -1,8 +1,7 @@
 import userEvent from '@testing-library/user-event'
 import { render, screen } from '@testing-library/react'
 import StarButton from './star-button.component'
-
-describe('StarButtonを、', () => {
+describe('StarButton', () => {
   let getByRole, getByTestId, queryByTestId, clickCallBack, checkbox, playerId
 
   beforeEach(() => {
@@ -10,7 +9,7 @@ describe('StarButtonを、', () => {
     playerId = 1
   })
 
-  describe('favoriteがfalseでレンダリングした時、', () => {
+  describe('when favorite is false', () => {
     beforeEach(() => {
       const favorite = false
       const renderResult = render(
@@ -25,19 +24,19 @@ describe('StarButtonを、', () => {
       queryByTestId = renderResult.queryByTestId
       checkbox = getByRole('checkbox')
     })
-    test('OFF状態で表示されること。', async () => {
+    it('displays in the OFF state.', () => {
       expect(checkbox).not.toBeChecked()
       expect(getByTestId('star-regular-icon')).toBeInTheDocument()
       expect(queryByTestId('star-solid-icon')).not.toBeInTheDocument()
     })
-    test('ボタンをクリックすると、コールバック関数がよばれること。またコールバック関数はplayerIdを引数として実行されていること。', async () => {
+    it('calls the callback function with playerId as an argument when the button is clicked.', async () => {
       await userEvent.click(screen.getByRole('checkbox'))
       expect(clickCallBack).toHaveBeenCalledTimes(1)
       expect(clickCallBack).toHaveBeenCalledWith(playerId)
     })
   })
 
-  describe('favoriteがtrueでレンダリングした時、', () => {
+  describe('when favorite is true', () => {
     beforeEach(() => {
       const favorite = true
       const renderResult = render(
@@ -52,12 +51,12 @@ describe('StarButtonを、', () => {
       queryByTestId = renderResult.queryByTestId
       checkbox = getByRole('checkbox')
     })
-    test('ON状態で表示されること。', async () => {
+    it('displays in the ON state.', () => {
       expect(checkbox).toBeChecked()
       expect(getByTestId('star-solid-icon')).toBeInTheDocument()
       expect(queryByTestId('star-regular-icon')).not.toBeInTheDocument()
     })
-    test('ボタンをクリックすると、コールバック関数がよばれること。またコールバック関数はplayerIdを引数として実行されていること。', async () => {
+    it('calls the callback function with playerId as an argument when the button is clicked.', async () => {
       await userEvent.click(screen.getByRole('checkbox'))
       expect(clickCallBack).toHaveBeenCalledTimes(1)
       expect(clickCallBack).toHaveBeenCalledWith(playerId)
