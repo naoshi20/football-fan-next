@@ -23,6 +23,7 @@ export default function StarButton({ playerId, favorite, clickCallBack }) {
             className={`${starButton.checkboxIcon} ${
               favorite ? `${starButton.checked}` : ''
             }`}
+            data-testid={favorite ? 'star-solid-icon' : 'star-regular-icon'}
           />
         </div>
       </label>
