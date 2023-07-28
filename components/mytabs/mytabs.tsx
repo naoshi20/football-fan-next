@@ -11,90 +11,79 @@ const unselectedButtonStyle =
 const tabContentStyle =
   'rounded-xl bg-white p-3 ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2'
 
+function TabButton({ selected, onClick, children }) {
+  return (
+    <button
+      className={`${buttonStyle} ${
+        selected ? selectedButtonStyle : unselectedButtonStyle
+      }`}
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  )
+}
+
 export default function MyTabs({ allPlayers }) {
   const [displayFavorite, setDisplayFavorite] = useState(true)
-  const initialValue = convertArrayToObject(
-    Object.values(ABBREVIATED_TEAM_NAME)
+  const initialValue = Object.fromEntries(
+    Object.values(ABBREVIATED_TEAM_NAME).map(name => [name, true])
   )
   const [displayTeamObj, setDisplayTeamObj] = useState(initialValue)
-
-  function toggleTab(favorite) {
-    setDisplayFavorite(favorite)
-  }
-
-  function toggleDisplayTeamObj(teamName) {
-    const nextDisplayTeamObj = { ...displayTeamObj }
-    nextDisplayTeamObj[teamName] = !displayTeamObj[teamName]
-    setDisplayTeamObj(nextDisplayTeamObj)
-  }
 
   return (
     <div>
       <div className="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
-        <button
-          className={
-            displayFavorite
-              ? buttonStyle + ' ' + selectedButtonStyle
-              : buttonStyle + ' ' + unselectedButtonStyle
-          }
-          onClick={() => toggleTab(true)}
+        <TabButton
+          selected={displayFavorite}
+          onClick={() => setDisplayFavorite(true)}
         >
           お気に入り
-        </button>
-        <button
-          className={
-            !displayFavorite
-              ? buttonStyle + ' ' + selectedButtonStyle
-              : buttonStyle + ' ' + unselectedButtonStyle
-          }
-          onClick={() => toggleTab(false)}
+        </TabButton>
+        <TabButton
+          selected={!displayFavorite}
+          onClick={() => setDisplayFavorite(false)}
         >
           全選手
-        </button>
+        </TabButton>
       </div>
       <div className="grid grid-cols-10 mt-4">
         {Object.values(ABBREVIATED_TEAM_NAME).map(teamName => (
           <button
-            onClick={() => toggleDisplayTeamObj(teamName)}
+            onClick={() =>
+              // おしゃだね
+              setDisplayTeamObj(prev => ({
+                ...prev,
+                [teamName]: !prev[teamName]
+              }))
+            }
             className="flex justify-center"
             key={teamName}
           >
             <Image
-              src={
-                displayTeamObj[teamName]
-                  ? `/images/teams/${teamName}.png`
-                  : `/images/teams/${teamName}_gray_alpha.png`
-              }
+              src={`/images/teams/${teamName}${
+                displayTeamObj[teamName] ? '' : '_gray_alpha'
+              }.png`}
               width={48}
               height={48}
-              alt="Picture of the player"
+              alt={`${teamName} team logo`}
               quality={100}
               priority={false}
             />
           </button>
         ))}
       </div>
-      <div>
-        <div className={tabContentStyle}>
-          <div className="wrapper">
-            <div className="row">
-              <Cards
-                allPlayers={allPlayers}
-                displayFavorite={displayFavorite}
-                displayTeamObj={displayTeamObj}
-              ></Cards>
-            </div>
+      <div className={tabContentStyle}>
+        <div className="wrapper">
+          <div className="row">
+            <Cards
+              allPlayers={allPlayers}
+              displayFavorite={displayFavorite}
+              displayTeamObj={displayTeamObj}
+            />
           </div>
         </div>
       </div>
     </div>
   )
-}
-
-function convertArrayToObject(array) {
-  const obj = {}
-  array.forEach(v => {
-    obj[v] = true
-  })
-  return obj
 }
