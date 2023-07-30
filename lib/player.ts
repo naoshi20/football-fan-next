@@ -4,10 +4,9 @@ import { Player } from '../model/player.model'
 
 // Create a Supabase client instance
 const supabase = createClientComponentClient()
+const env = process.env.NODE_ENV
 
 export async function getPlayers(): Promise<Player[] | null> {
-  const env = process.env.NODE_ENV
-
   try {
     let result
     if (env == 'development') {
@@ -59,8 +58,6 @@ export async function getPlayerData(playerId: number): Promise<Player | null> {
 }
 
 export async function getAllPlayerIds(): Promise<Player[] | null> {
-  const env = process.env.NODE_ENV
-
   try {
     let result
     if (env == 'development') {
@@ -98,8 +95,6 @@ export async function updatePlayer(
   playerId: number,
   favorite: boolean
 ): Promise<Player[] | null> {
-  const supabase = createClientComponentClient()
-
   try {
     const { data, error } = await supabase
       .from(DATABASE_TABLE_NAME)
