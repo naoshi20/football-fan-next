@@ -2,8 +2,10 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 export const DATABASE_TABLE_NAME = 'players'
 import { Player } from '../model/player.model'
 
-export async function getPlayers(): Promise<any> {
-  const supabase = createClientComponentClient()
+// Create a Supabase client instance
+const supabase = createClientComponentClient()
+
+export async function getPlayers(): Promise<Player[] | null> {
   const env = process.env.NODE_ENV
 
   try {
@@ -30,12 +32,11 @@ export async function getPlayers(): Promise<any> {
     return result.data
   } catch (error) {
     console.log('Error loading user data!')
+    return null
   }
 }
 
 export async function getPlayerData(playerId: number): Promise<Player | null> {
-  const supabase = createClientComponentClient()
-
   try {
     const { data, error, status } = await supabase
       .from(DATABASE_TABLE_NAME)
@@ -57,10 +58,7 @@ export async function getPlayerData(playerId: number): Promise<Player | null> {
   }
 }
 
-export async function getAllPlayerIds(): Promise<
-  { [key: string]: { id: any } }[] | null
-> {
-  const supabase = createClientComponentClient()
+export async function getAllPlayerIds(): Promise<Player[] | null> {
   const env = process.env.NODE_ENV
 
   try {
@@ -92,26 +90,33 @@ export async function getAllPlayerIds(): Promise<
     })
   } catch (error) {
     console.log('Error loading user data!')
+    return null
   }
-  return null
 }
 
-export async function updatePlayer(playerId, favorite): Promise<any> {
+export async function updatePlayer(
+  playerId: number,
+  favorite: boolean
+): Promise<Player[] | null> {
   const supabase = createClientComponentClient()
 
   try {
-    const { data, error, status } = await supabase
+    const { data, error } = await supabase
       .from(DATABASE_TABLE_NAME)
       .update({ favorite: favorite })
       .eq('id', playerId)
-      .select()
 
-    if (error && status !== 406) {
+    if (error) {
       throw error
     }
 
-    return data
+    if (data) {
+      return data as Player[]
+    }
+
+    return null
   } catch (error) {
-    console.log('Error loading user data!')
+    console.error(`Error updating player data: ${error.message}`)
+    return null
   }
 }
