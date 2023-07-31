@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import Base, { siteTitle } from '../../components/base/base'
-import { getAllPlayerIds } from '../../lib/player'
-import { getPlayerData } from '../../lib/player'
+import { PlayerService } from '../../lib/playerService'
 import Image from 'next/image'
 import { Player } from '../../model/player.model'
 import { getFlagData } from '../../lib/flag'
@@ -138,7 +137,8 @@ export default function Player({ playerData }) {
 }
 
 export async function getStaticPaths() {
-  const paths = await getAllPlayerIds()
+  const playerService = new PlayerService()
+  const paths = await playerService.getAllPlayerIds()
   return {
     paths,
     fallback: false
@@ -146,7 +146,8 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const playerData = await getPlayerData(params.id)
+  const playerService = new PlayerService()
+  const playerData = await playerService.getPlayerData(params.id)
   return {
     props: {
       playerData

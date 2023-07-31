@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Base, { siteTitle } from '../components/base/base'
-import { getPlayers } from '../lib/player'
+import { PlayerService } from '..//lib/playerService'
 import MyTabs from '../components/mytabs/mytabs'
 
 export default function Home({ allPlayers }) {
@@ -16,7 +16,8 @@ export default function Home({ allPlayers }) {
 }
 
 export async function getStaticProps() {
-  const allPlayers = await getPlayers()
+  const playerService = new PlayerService()
+  const allPlayers = await playerService.getPlayers()
   return {
     props: {
       allPlayers

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Card from '../card/card.component'
-import { updatePlayer } from '../../lib/player'
+import { PlayerService } from '../../lib/playerService'
 import { ABBREVIATED_TEAM_NAME } from '../../model/team.model'
 
 export default function cards({ allPlayers, displayFavorite, displayTeamObj }) {
@@ -15,7 +15,11 @@ export default function cards({ allPlayers, displayFavorite, displayTeamObj }) {
     nextAllPlayersState[targetPlayerIndex].favorite =
       !nextAllPlayersState[targetPlayerIndex].favorite
     setAllPlayersState(nextAllPlayersState)
-    updatePlayer(playerId, nextAllPlayersState[targetPlayerIndex].favorite)
+    const playerService = new PlayerService()
+    playerService.updatePlayer(
+      playerId,
+      nextAllPlayersState[targetPlayerIndex].favorite
+    )
   }
 
   return (
