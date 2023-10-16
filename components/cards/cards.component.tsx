@@ -24,26 +24,28 @@ export default function cards({ allPlayers, displayFavorite, displayTeamObj }) {
 
   return (
     <>
-      {currentAllPlayers
-        .filter(player =>
-          // favoriteタブならfilterかけるが、そうでなければ全ての行を返す
-          displayFavorite ? player.favorite === true : true
-        )
-        .filter(
-          player => displayTeamObj[ABBREVIATED_TEAM_NAME[player.belongings]]
-        )
-        .map(({ id, japanese_name, belongings, img, favorite }) => (
-          <Card
-            // keyに一意なidをセットすることでタブ切り替えの際にリレンダリングされるのを防ぐ
-            key={id}
-            id={id}
-            japanese_name={japanese_name}
-            belongings={belongings}
-            img={img}
-            favorite={favorite}
-            clickCallBack={updatePlayersFavoriteStatus}
-          ></Card>
-        ))}
+      {currentAllPlayers &&
+        currentAllPlayers.length > 0 &&
+        currentAllPlayers
+          .filter(player =>
+            // favoriteタブならfilterかけるが、そうでなければ全ての行を返す
+            displayFavorite ? player.favorite === true : true
+          )
+          .filter(
+            player => displayTeamObj[ABBREVIATED_TEAM_NAME[player.belongings]]
+          )
+          .map(({ id, japanese_name, belongings, img, favorite }) => (
+            <Card
+              // keyに一意なidをセットすることでタブ切り替えの際にリレンダリングされるのを防ぐ
+              key={id}
+              id={id}
+              japanese_name={japanese_name}
+              belongings={belongings}
+              img={img}
+              favorite={favorite}
+              clickCallBack={updatePlayersFavoriteStatus}
+            ></Card>
+          ))}
     </>
   )
 }
